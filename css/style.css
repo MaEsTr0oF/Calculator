@@ -1,0 +1,129 @@
+:root {
+    --bg-color: #f0f2f5;
+    --calc-bg: #ffffff;
+    --display-bg: #222;
+    --display-text: #fff;
+    --btn-bg: #f8f9fa;
+    --btn-hover: #e9ecef;
+    --btn-active: #dee2e6;
+    --operator-bg: #ff9f0a;
+    --operator-text: #fff;
+    --function-bg: #ced4da;
+    --memory-bg: #adb5bd;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+}
+
+.calculator {
+    background-color: var(--calc-bg);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 500px;
+    overflow: hidden;
+}
+
+.display {
+    background-color: var(--display-bg);
+    color: var(--display-text);
+    padding: 20px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 120px;
+}
+
+.previous-operand {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.75);
+    min-height: 1.5rem;
+}
+
+.current-operand {
+    font-size: 2.5rem;
+    font-weight: bold;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background-color: #dee2e6;
+}
+
+.btn {
+    height: 60px;
+    border: none;
+    font-size: 1.1rem;
+    background-color: var(--btn-bg);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn:active {
+    background-color: var(--btn-active);
+    transform: scale(0.98);
+}
+
+.operator {
+    background-color: var(--operator-bg);
+    color: var(--operator-text);
+    font-weight: bold;
+}
+
+.operator:hover {
+    background-color: #e08d0a;
+}
+
+.function {
+    background-color: var(--function-bg);
+    font-size: 0.95rem;
+}
+
+.function:hover {
+    background-color: #b8bfc6;
+}
+
+.memory {
+    background-color: var(--memory-bg);
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+.memory:hover {
+    background-color: #96a0aa;
+}
+
+.equals {
+    background-color: var(--operator-bg);
+    color: var(--operator-text);
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.equals:hover {
+    background-color: #e08d0a;
+}
+
+.zero {
+    grid-column: span 2;
+}
