@@ -1,0 +1,24 @@
+# Используем Fedora как базу (так как мы делаем RPM)
+FROM fedora:latest
+
+# Устанавливаем базовые утилиты (git, sudo нужны для скрипта, dos2unix для фикса переносов строк)
+RUN dnf install -y git sudo which dos2unix
+
+# Создаем рабочую директорию
+WORKDIR /app
+
+# Копируем проект внутрь контейнера
+COPY . .
+
+# Исправляем переносы строк (Windows CRLF -> Linux LF)
+RUN dos2unix ci.sh installer/calculator.spec
+
+# Делаем скрипт исполняемым
+RUN chmod +x ci.sh
+
+# Запускаем CI скрипт
+# Мы передаем "1.0" как версию
+RUN ./ci.sh . 1.0
+
+# Проверяем, что установка прошла успешно
+RUN ls -l /usr/share/modular-calculator

@@ -1,0 +1,17 @@
+# Используем Windows Server Core с PowerShell
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+
+# Создаем рабочую директорию
+WORKDIR /app
+
+# Копируем проект
+COPY . .
+
+# Запускаем PowerShell скрипт
+# Используем флаг Bypass, как мы выяснили ранее
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+RUN powershell -ExecutionPolicy Bypass -File installer/install.ps1
+
+# Проверяем, что файлы скопировались в LocalAppData
+# (В контейнере путь может отличаться, проверяем стандартный путь пользователя ContainerAdministrator)
+RUN dir "C:\Users\ContainerAdministrator\AppData\Local\ModularCalculator"
