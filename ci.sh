@@ -68,7 +68,7 @@ fi
 
 echo "[1/5] Updating source code..."
 cd "$SRCDIR" || exit
-git pull origin master || echo "Warning: git pull failed (not a git repo?)"
+git pull origin main || echo "Warning: git pull failed (not a git repo?)"
 
 echo "[2/5] Building project..."
 if [ -f "index.html" ]; then
@@ -126,8 +126,7 @@ TARGET_SPEC="$RPMBUILD_DIR/SPECS/$PROJECT_NAME.spec"
 
 if [ -f "$SPEC_FILE" ]; then
     echo "Updating spec file version..."
-    sed "s/Version: .*/Version: $VERSION/" "$SPEC_FILE" > "$TARGET_SPEC"
-    
+    sed -e 's/\r$//' -e "s/Version: .*/Version: $VERSION/" "$SPEC_FILE" > "$TARGET_SPEC"
     echo "Running rpmbuild..."
     rpmbuild -bb "$TARGET_SPEC"
 else
